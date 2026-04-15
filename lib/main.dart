@@ -41,10 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.pink[100],
         title: Text(widget.title),
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blue[100],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +52,26 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text('ボタンを押した回数:'),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 114),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('お知らせ'),
+                    content: const Text('ボタンが押されました！'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: const Text('アラートを表示'),
             ),
           ],
         ),
